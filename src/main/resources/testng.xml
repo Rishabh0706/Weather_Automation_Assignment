@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Weather Automation Test Suite">
+  <test name="Weather Info Test">
+  <parameter name="cityName" value="Rajkot"></parameter>
+  <parameter name="tempratureListSize" value="2"></parameter>
+    <classes>
+      <class name="com.vagrant.qa.testCases.WeatherPageTest"/>
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->

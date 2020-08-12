@@ -17,7 +17,7 @@ public class TestBase {
 	protected static Properties prop;
 	
 	private static long PAGE_LOAD_TIMEOUT = 20;
-	private static long IMPLICIT_WAIT = 20;
+	private static long IMPLICIT_WAIT = 40;
 	
 	public TestBase() {
 		
