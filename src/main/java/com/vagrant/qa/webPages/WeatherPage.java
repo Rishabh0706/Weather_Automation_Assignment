@@ -31,6 +31,7 @@ public class WeatherPage extends TestBase {
 		
 	}
 	
+	
 	public String getCityInfo(String cityName) throws InterruptedException {
 		
 		selectCity(cityName);
@@ -41,6 +42,7 @@ public class WeatherPage extends TestBase {
 		
 		return cityText;
 	}
+	
 	
 	public int getTempratureInfo(String cityName) throws InterruptedException {
 		
@@ -53,6 +55,20 @@ public class WeatherPage extends TestBase {
 		}
 		
 		return tempratures.size();
+	} 
+	
+	
+	public boolean getWeatherDetailPopUp(String cityName) throws InterruptedException {
+		
+		selectCity(cityName);
+		
+		driver.findElement(By.xpath("//div[@title='" + cityName + "']")).click();
+		
+		WebElement weatherPopUp = driver.findElement(By.xpath("//span[contains(text(),'" + cityName + "')]"
+				+ "//ancestor::div[@class='leaflet-popup-content-wrapper']"));
+		
+		return weatherPopUp.isDisplayed();
+		
 	}
 
 }

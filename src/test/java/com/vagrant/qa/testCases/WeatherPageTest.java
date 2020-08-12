@@ -45,6 +45,18 @@ public class WeatherPageTest extends TestBase{
 
 	}
 	
+	@Parameters({"cityName"})
+	@Test
+	public void validateWeatherDetailsPopUpisDisplayed(String cityName) throws InterruptedException {
+		
+		weatherPage = homePage.goToWeatherPage();
+		
+		Boolean popUpState = weatherPage.getWeatherDetailPopUp(cityName);
+		
+		Assert.assertTrue(popUpState, "Weather Details Popup is not displayed");;
+
+	}
+	
 	@AfterMethod
 	public void clean() throws InterruptedException {
 		
