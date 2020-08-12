@@ -5,7 +5,7 @@
   <parameter name="cityName" value="Rajkot"></parameter>
   <parameter name="tempratureListSize" value="2"></parameter>
     <classes>
-      <class name="com.vagrant.qa.testCases.WeatherPageTest"/>
+      <class name="testCases.WeatherPageTest"/>
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->

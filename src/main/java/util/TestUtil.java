@@ -1,12 +1,11 @@
-package com.vagrant.qa.util;
+package util;
 
 import static io.restassured.RestAssured.given;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import com.vagrant.qa.base.TestBase;
-
+import base.TestBase;
 import io.restassured.response.Response;
 
 public class TestUtil extends TestBase{
@@ -19,6 +18,7 @@ public class TestUtil extends TestBase{
 	 */
 	public static LinkedHashMap<String, Integer> getResponseObjectFromApi(String cityName) {
 		
+		log.info("getting response from API");
 		Response response = given().queryParam("q", cityName)
 				.queryParam("appid", prop.getProperty("apiKey"))
 				.queryParam("units", prop.getProperty("tempUnit"))
@@ -99,6 +99,7 @@ public class TestUtil extends TestBase{
 	 */
 	public static boolean comparator(int object1, int object2, int variance) {
 		
+		log.info("comparing values in comparator");
 		int diff;
 		
 		if (object1 > object2)

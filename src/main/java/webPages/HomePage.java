@@ -1,10 +1,10 @@
-package com.vagrant.qa.webPages;
+package webPages;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import com.vagrant.qa.base.TestBase;
+import base.TestBase;
 
 public class HomePage extends TestBase {
 	
@@ -15,11 +15,13 @@ public class HomePage extends TestBase {
 	WebElement weatherButton;
 	
 	public HomePage() {
+		log.info("initializing home page factory");
 		PageFactory.initElements(driver, this);
 	}
 	
 	public WeatherPage goToWeatherPage() {
 		
+		log.info("going to weather page");
 		subMenuDots.click();
 		weatherButton.click();
 		

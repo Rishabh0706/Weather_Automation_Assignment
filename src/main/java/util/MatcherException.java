@@ -1,4 +1,4 @@
-package com.vagrant.qa.util;
+package util;
 
 @SuppressWarnings("serial")
 public class MatcherException extends Exception{

@@ -1,4 +1,4 @@
-package com.vagrant.qa.webPages;
+package webPages;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -9,7 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import com.vagrant.qa.base.TestBase;
+import base.TestBase;
 
 public class WeatherPage extends TestBase {
 	
@@ -20,6 +20,7 @@ public class WeatherPage extends TestBase {
 	static WebElement cityCheckBox;
 	
 	public WeatherPage() {
+		log.info("initializing weather page factory");
 		PageFactory.initElements(driver, this);
 	}
 	
@@ -27,10 +28,11 @@ public class WeatherPage extends TestBase {
 		
 		Thread.sleep(2000);
 		
+		log.info("Entering cityname in textbox");
 		searchBox.sendKeys(cityName);
 		
+		log.info("selecting checkbox");
 		cityCheckBox.click();
-		
 	}
 	
 	
@@ -38,9 +40,8 @@ public class WeatherPage extends TestBase {
 		
 		selectCity(cityName);
 		
+		log.info("reading city text");
 		String cityText = driver.findElement(By.xpath("//div[@title='" + cityName + "']/div[@class='cityText']")).getText();
-		
-		System.out.println("city name - " + cityText);
 		
 		return cityText;
 	}
@@ -50,11 +51,9 @@ public class WeatherPage extends TestBase {
 		
 		selectCity(cityName);
 		
-		List<WebElement> tempratures = driver.findElements(By.xpath("//div[@title='" + cityName + "']/div[@class='temperatureContainer']/span"));
-		
-		for (WebElement e : tempratures) {
-			System.out.println("temprature - " + e.getText());
-		}
+		log.info("reading tempratures from web page");
+		List<WebElement> tempratures = driver.findElements(By.xpath("//div[@title='" + cityName + "']"
+				+ "/div[@class='temperatureContainer']/span"));
 		
 		return tempratures.size();
 	} 
@@ -64,6 +63,7 @@ public class WeatherPage extends TestBase {
 		
 		selectCity(cityName);
 		
+		log.info("opening weather detail pop up");
 		driver.findElement(By.xpath("//div[@title='" + cityName + "']")).click();
 		
 		WebElement weatherPopUp = driver.findElement(By.xpath("//span[contains(text(),'" + cityName + "')]"
@@ -77,6 +77,7 @@ public class WeatherPage extends TestBase {
 		
 		selectCity(cityName);
 		
+		log.info("creating weather detail object from web page");
 		driver.findElement(By.xpath("//div[@title='" + cityName + "']")).click();
 		
 		List<WebElement> weatherDetailList = driver.findElements(By.xpath("//span[contains(text(),'" + cityName + "')]"

@@ -1,4 +1,4 @@
-package com.vagrant.qa.base;
+package base;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -15,21 +16,22 @@ public class TestBase {
 	
 	protected static WebDriver driver;
 	protected static Properties prop;
+	protected static Logger log = Logger.getLogger(TestBase.class);
 	
 	private static long PAGE_LOAD_TIMEOUT = 20;
 	private static long IMPLICIT_WAIT = 40;
 	
 	public TestBase() {
 		
+		log.info("Reading Properties File");
 		try {
 			prop = new Properties();
-			FileInputStream ip = new FileInputStream(System.getProperty("user.dir")+"/src/main/java/com/vagrant"
-					+ "/qa/config/config.properties");
+			FileInputStream ip = new FileInputStream(System.getProperty("user.dir")+"/src/main/java/config/config.properties");
 			prop.load(ip);
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			log.error(e);
 		} catch (IOException e) {
-			e.printStackTrace();
+			log.error(e);
 		}
 	}
 	
@@ -39,6 +41,7 @@ public class TestBase {
 		
 		File driversPath = new File(System.getProperty("user.dir"));
 		
+		log.info("Opening Browser");
 		if(browserName.equals("chrome")) {
 			System.setProperty("webdriver.chrome.driver", driversPath+"/chromedriver");	
 			driver = new ChromeDriver(); 
@@ -52,6 +55,7 @@ public class TestBase {
 		driver.manage().timeouts().pageLoadTimeout(PAGE_LOAD_TIMEOUT, TimeUnit.SECONDS);
 		driver.manage().timeouts().implicitlyWait(IMPLICIT_WAIT, TimeUnit.SECONDS);
 		
+		log.info("Opening URL - " + prop.getProperty("pageUrl"));
 		driver.get(prop.getProperty("pageUrl"));
 	}
 

@@ -1,4 +1,4 @@
-package com.vagrant.qa.testCases;
+package testCases;
 
 import org.testng.annotations.Test;
 
@@ -9,11 +9,11 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 
-import com.vagrant.qa.base.TestBase;
-import com.vagrant.qa.util.MatcherException;
-import com.vagrant.qa.util.TestUtil;
-import com.vagrant.qa.webPages.HomePage;
-import com.vagrant.qa.webPages.WeatherPage;
+import base.TestBase;
+import util.MatcherException;
+import util.TestUtil;
+import webPages.HomePage;
+import webPages.WeatherPage;
 
 public class WeatherPageTest extends TestBase{
 	
@@ -34,6 +34,7 @@ public class WeatherPageTest extends TestBase{
 		
 		String cityText = weatherPage.getCityInfo(cityName);
 		
+		log.info("asserting city name");
 		Assert.assertEquals(cityText, cityName);
 
 	}
@@ -46,6 +47,7 @@ public class WeatherPageTest extends TestBase{
 		
 		int tempListSize = weatherPage.getTempratureInfo(cityName);
 		
+		log.info("asserting temprature info");
 		Assert.assertEquals(tempListSize, tempratureListSize);
 
 	}
@@ -58,6 +60,7 @@ public class WeatherPageTest extends TestBase{
 		
 		Boolean popUpState = weatherPage.getWeatherDetailPopUp(cityName);
 		
+		log.info("asserting popup details");
 		Assert.assertTrue(popUpState, "Weather Details Popup is not displayed");;
 
 	}
@@ -78,15 +81,14 @@ public class WeatherPageTest extends TestBase{
 		Boolean comaparisonResult = TestUtil.getComparisonResult(weatherObjectFromPage, 
 				weatherObjectFromApi, humidVariance, tempVariance);
 		
+		log.info("asserting comparison results");
 		Assert.assertTrue(comaparisonResult);
 		
 
 	}
 	
 	@AfterMethod
-	public void clean() throws InterruptedException {
-		
-		Thread.sleep(1000);
+	public void clean() {
 		driver.quit();
 	}
 
