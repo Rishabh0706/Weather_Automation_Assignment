@@ -11,6 +11,12 @@ import io.restassured.response.Response;
 
 public class TestUtil extends TestBase{
 	
+	
+	/**
+	 * Get weather detail object from API
+	 * @param cityName
+	 * @return
+	 */
 	public static LinkedHashMap<String, Integer> getResponseObjectFromApi(String cityName) {
 		
 		Response response = given().queryParam("q", cityName)
@@ -35,6 +41,17 @@ public class TestUtil extends TestBase{
 		return weatherObjectFromApi;
 	}
 	
+	
+	
+	/**
+	 * Compares two key-value(String-Integer) objects as per given variance
+	 * @param weatherObjectFromPage - weather detail object from web Page
+	 * @param weatherObjectFromApi - weather detail object from API
+	 * @param humidVariance - variance range for humidity
+	 * @param tempVariance - variance range for temperature
+	 * @return true if all values matched correctly as per variance range
+	 * @throws MatcherException
+	 */
 	public static boolean getComparisonResult(LinkedHashMap<String, Integer> weatherObjectFromPage, 
 			LinkedHashMap<String, Integer> weatherObjectFromApi, int humidVariance, int tempVariance) throws MatcherException {
 		
@@ -72,7 +89,15 @@ public class TestUtil extends TestBase{
 		
 	}
 	
-	public static boolean comparator(int object1, int object2, int v) {
+	
+	/**
+	 * This method compares two integer objects and returns result as per given variance
+	 * @param object1 - first object to be compared
+	 * @param object2 - first object to be compared
+	 * @param variance - acceptable difference range
+	 * @return boolean
+	 */
+	public static boolean comparator(int object1, int object2, int variance) {
 		
 		int diff;
 		
@@ -81,7 +106,7 @@ public class TestUtil extends TestBase{
 		else
 			diff = object2 - object1;
 		
-		if (diff <= v)
+		if (diff <= variance)
 			return true;
 		else
 			return false;
