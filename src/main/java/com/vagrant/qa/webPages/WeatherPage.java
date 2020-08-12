@@ -82,7 +82,7 @@ public class WeatherPage extends TestBase {
 		List<WebElement> weatherDetailList = driver.findElements(By.xpath("//span[contains(text(),'" + cityName + "')]"
 				+ "//parent::div//following-sibling::span[@class='heading']"));
 		
-		LinkedHashMap<String, Integer> weatherObject = new LinkedHashMap<String, Integer>();
+		LinkedHashMap<String, Integer> weatherObjectFromPage = new LinkedHashMap<String, Integer>();
 		
 		for(WebElement e : weatherDetailList) {
 			
@@ -91,22 +91,23 @@ public class WeatherPage extends TestBase {
 			if (detail.contains("Humidity")) {
 				String[] humidity = detail.replace("%", "").split(": ");
 				int humidValue = Integer.parseInt(humidity[1]);
-				weatherObject.put("humidityIn%", humidValue);
+				weatherObjectFromPage.put("humidityIn%", humidValue);
 			}
 			
 			if (detail.contains("Degrees")) {
 				String[] temp = detail.split(": ");
 				int tempValue = Integer.parseInt(temp[1]);
-				weatherObject.put("tempInDegrees", tempValue);
+				weatherObjectFromPage.put("tempInDegrees", tempValue);
 			}
 		}
 		
-		for (Map.Entry<String, Integer> m : weatherObject.entrySet()) {
+		System.out.println("Weather Object From web Page ----- ");
+		for (Map.Entry<String, Integer> m : weatherObjectFromPage.entrySet()) {
 			
 			System.out.println(m.getKey() + " : " + m.getValue());
 		}
 		
-		return weatherObject;
+		return weatherObjectFromPage;
 		
 	}
 
