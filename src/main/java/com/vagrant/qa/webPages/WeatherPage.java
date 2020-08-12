@@ -1,6 +1,8 @@
 package com.vagrant.qa.webPages;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -68,6 +70,43 @@ public class WeatherPage extends TestBase {
 				+ "//ancestor::div[@class='leaflet-popup-content-wrapper']"));
 		
 		return weatherPopUp.isDisplayed();
+		
+	}
+	
+	public LinkedHashMap<String, Integer> createWeatherDetailObject(String cityName) throws InterruptedException {
+		
+		selectCity(cityName);
+		
+		driver.findElement(By.xpath("//div[@title='" + cityName + "']")).click();
+		
+		List<WebElement> weatherDetailList = driver.findElements(By.xpath("//span[contains(text(),'" + cityName + "')]"
+				+ "//parent::div//following-sibling::span[@class='heading']"));
+		
+		LinkedHashMap<String, Integer> weatherObject = new LinkedHashMap<String, Integer>();
+		
+		for(WebElement e : weatherDetailList) {
+			
+			String detail = e.getText();
+			
+			if (detail.contains("Humidity")) {
+				String[] humidity = detail.replace("%", "").split(": ");
+				int humidValue = Integer.parseInt(humidity[1]);
+				weatherObject.put("humidityIn%", humidValue);
+			}
+			
+			if (detail.contains("Degrees")) {
+				String[] temp = detail.split(": ");
+				int tempValue = Integer.parseInt(temp[1]);
+				weatherObject.put("tempInDegrees", tempValue);
+			}
+		}
+		
+		for (Map.Entry<String, Integer> m : weatherObject.entrySet()) {
+			
+			System.out.println(m.getKey() + " : " + m.getValue());
+		}
+		
+		return weatherObject;
 		
 	}
 
