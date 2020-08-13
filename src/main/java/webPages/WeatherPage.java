@@ -102,10 +102,10 @@ public class WeatherPage extends TestBase {
 			}
 		}
 		
-		System.out.println("Weather Object From web Page ----- ");
+		log.info("Weather Object From web Page ----- ");
 		for (Map.Entry<String, Integer> m : weatherObjectFromPage.entrySet()) {
 			
-			System.out.println(m.getKey() + " : " + m.getValue());
+			log.info(m.getKey() + " : " + m.getValue());
 		}
 		
 		return weatherObjectFromPage;

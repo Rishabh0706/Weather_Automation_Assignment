@@ -33,9 +33,9 @@ public class TestUtil extends TestBase{
 		weatherObjectFromApi.put("humidityIn%", humidValue);
 		weatherObjectFromApi.put("tempInDegrees", tempValue);
 		
-		System.out.println("Weather Object From Api ----- ");
+		log.info("Weather Object From Api ----- ");
 		for (Map.Entry<String, Integer> m : weatherObjectFromApi.entrySet()) {
-			System.out.println(m.getKey() + " : " + m.getValue());
+			log.info(m.getKey() + " : " + m.getValue());
 		}
 		
 		return weatherObjectFromApi;
@@ -77,10 +77,10 @@ public class TestUtil extends TestBase{
 		}
 		
 		Boolean humidResult = comparator(humidFromPage, humidFromApi, humidVariance);
-		System.out.println("Humidity Comparator Result - " + humidResult);
+		log.info("Humidity Comparator Result - " + humidResult);
 		
 		Boolean tempResult = comparator(tempFromPage, tempFromApi, tempVariance);
-		System.out.println("Temprature Comparator Result - " + tempResult);
+		log.info("Temprature Comparator Result - " + tempResult);
 		
 		if (humidResult && tempResult)
 			return true;

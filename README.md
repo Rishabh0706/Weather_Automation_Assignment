@@ -1,5 +1,5 @@
 # Weather_Automation_Assignment
-This repository contains automation code for a weather reporting related task
+This repository contains automation code for a weather reporting related task.
 
 # Steps to execute
 1. Clone https://github.com/Rishabh0706/Weather_Automation_Assignment.git
@@ -9,4 +9,9 @@ This repository contains automation code for a weather reporting related task
 	* mvn test - execute test cases only
 4. TestNg report path - /Weather_Automation_Assignment/target/surefire-reports/index.html
 5. Log file will be created at the root directory of the project with name "application.log"
+
+
+# Configure Variance Logic
+Variance logic for humidity and temperature values can be configured easily from config.properties file.
+Configure "humidVariance" and "tempVariance" values in config.properties file under src/main/java/config package and the test results will vary as per given variance values.
 
